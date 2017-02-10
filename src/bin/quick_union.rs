@@ -23,16 +23,18 @@ fn main() {
         let value = line.unwrap();
         let (p, q) = line_to_connected_pair(value);
 
-        let t = id[p as usize];
-        let u = id[q as usize];
+        let mut i = p;
+        while i != id[i as usize] {
+            i = id[i as usize]
+        }
+        let mut j = q;
+        while j != id[j as usize] {
+            j = id[j as usize]
+        }
 
-        if t != u {
-            for i in 0 .. N {
-                if id[i] == t {
-                    id[i] = u;
-                }
-            }
-            println!("{} {}", p, q);
+        if i != j {
+            id[i as usize] = j;
+            println!("{} {}", p, q)
         }
     }
 }
