@@ -3,6 +3,14 @@ use std::io::prelude::*;
 
 const N: usize = 10000;
 
+fn line_to_connected_pair(line: String) -> (u32, u32) {
+    let items: Vec<u32> = line
+        .split_whitespace()
+        .map(|i| i.parse().unwrap())
+        .collect();
+    (items[0], items[1])
+}
+
 fn main() {
     let stdin = io::stdin();
     let mut id = [0; N];
@@ -13,14 +21,7 @@ fn main() {
 
     for line in stdin.lock().lines() {
         let value = line.unwrap();
-
-        let items: Vec<u32> = value
-            .split_whitespace()
-            .map(|i| i.parse().unwrap())
-            .collect();
-
-        let p = items[0];
-        let q = items[1];
+        let (p, q) = line_to_connected_pair(value);
 
         let t = id[p as usize];
         let u = id[q as usize];
