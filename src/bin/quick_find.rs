@@ -12,24 +12,26 @@ fn main() {
     }
 
     for line in stdin.lock().lines() {
-        let test = line.unwrap();
-        let items: Vec<&str> = test.split(' ').collect();
+        let value = line.unwrap();
 
-        let p: usize = items[0].parse().unwrap();
-        let q: usize = items[1].parse().unwrap();
+        let items: Vec<u32> = value
+            .split_whitespace()
+            .map(|i| i.parse().unwrap())
+            .collect();
 
-        let t = id[p];
-        let u = id[q];
+        let p = items[0];
+        let q = items[1];
 
-        if t == u {
-            continue;
-        } else {
+        let t = id[p as usize];
+        let u = id[q as usize];
+
+        if t != u {
             for i in 0 .. N {
                 if id[i] == t {
                     id[i] = u;
                 }
             }
-            println!(" {} {}", p, q);
+            println!("{} {}", p, q);
         }
     }
 }
