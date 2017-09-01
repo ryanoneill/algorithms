@@ -1,15 +1,11 @@
+extern crate algorithms;
+
 use std::io;
 use std::io::prelude::*;
 
-const N: usize = 10000;
+use algorithms::*;
 
-fn line_to_connected_pair(line: String) -> (u32, u32) {
-    let items: Vec<u32> = line
-        .split_whitespace()
-        .map(|i| i.parse().unwrap())
-        .collect();
-    (items[0], items[1])
-}
+const N: usize = 10000;
 
 fn main() {
     let stdin = io::stdin();
@@ -21,7 +17,7 @@ fn main() {
 
     for line in stdin.lock().lines() {
         let value = line.unwrap();
-        let (p, q) = line_to_connected_pair(value);
+        let (p, q) = line_to_connected_pair(&value);
 
         let t = id[p as usize];
         let u = id[q as usize];
